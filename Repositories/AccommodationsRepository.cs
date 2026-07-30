@@ -137,9 +137,9 @@ namespace BeinHazmanimFinderAPI.Ripositories
             query = query.Where(a => a.PricePerNight < maxPrice.Value);
         }
 
-        if (accessible != null)
+        if (accessible.HasValue)
         {
-            query = query.Where(a => a.IsAccessible);
+            query = query.Where(a => a.IsAccessible == accessible.Value);
         }
 
             var result = query.OrderBy(a => a.PricePerNight).ThenBy(a => a.Name).ToList();
