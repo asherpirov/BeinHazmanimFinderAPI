@@ -23,7 +23,7 @@ namespace BeinHazmanimFinderAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<ActivityPlace>> GetPlaceByIdAsync(int id)
+        public async Task<ActionResult<ActivityPlace>> GetByIdAsync(int id)
         {
             var activityPlace = await _ripository.GetByIdAsync(id);
 
@@ -39,7 +39,7 @@ namespace BeinHazmanimFinderAPI.Controllers
         {
             var created = await _ripository.CreateAsync(activityPlace);
 
-            return CreatedAtAction(nameof(GetPlaceByIdAsync), new { id = created.Id }, created);
+            return CreatedAtAction("GetById", new { id = created.Id }, created);
         }
 
         [HttpPut("{id}")]
@@ -64,6 +64,15 @@ namespace BeinHazmanimFinderAPI.Controllers
                 return NotFound();
             }
             return NoContent();
+        }
+
+        [HttpGet("search")]
+        public async Task<ActionResult<IEnumerable<ActivityPlace>>> SearchAsync(
+            [FromQuery] string? category, [FromQuery] string? city, [FromQuery] decimal? maxPrice, [FromQuery] string? audience)
+        {
+            var query = await _ripository.SearchAsync(category, city, maxPrice, audience);
+
+            return Ok(query);
         }
 
     };

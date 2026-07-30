@@ -120,6 +120,41 @@ namespace BeinHazmanimFinderAPI.Ripositories
             return true;
 
         }
-   
+
+        public async Task<IEnumerable<Accommodation>> SreachAsync(string? city, decimal? maxPrice, bool? accessible)
+        {
+
+            var query = _accommodations.AsQueryable();
+
+
+        if (!string.IsNullOrWhiteSpace(city))
+        {
+            query = query.Where(a => a.City.Equals(city, StringComparison.OrdinalIgnoreCase));
+        }
+
+        if (maxPrice.HasValue)
+        {
+            query = query.Where(a => a.PricePerNight < maxPrice.Value);
+        }
+
+        if (accessible != null)
+        {
+            query = query.Where(a => a.IsAccessible);
+        }
+
+            var result = query.OrderBy(a => a.PricePerNight).ThenBy(a => a.Name).ToList();
+            return await Task.FromResult(result);
+        }
+
+        public async Task<IEnumerable<string>> GetAccommodationTypesAsync()
+        {
+            var types = _accommodations.Select(a => a.AccommodationType.ToString()) 
+                .Distinct()                                  
+                .OrderBy(t => t)                              
+                .ToList();
+
+            return await Task.FromResult(types);
+        }
+
     }
 }

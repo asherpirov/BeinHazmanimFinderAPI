@@ -125,5 +125,32 @@ namespace BeinHazmanimFinderAPI.Ripositories
 
         }
 
+        public async Task<IEnumerable<ActivityPlace>> SearchAsync(string? category, string? city, decimal? maxPrice, string? audience)
+        {
+            var query = _activityPlaces.AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(category))
+            {
+                query = query.Where(c => c.Category.ToString().Equals(category, StringComparison.OrdinalIgnoreCase));
+            }
+
+            if (!string.IsNullOrWhiteSpace(city))
+            {
+                query = query.Where(c => c.City.Equals(city, StringComparison.OrdinalIgnoreCase));
+            }
+
+            if (maxPrice.HasValue)
+            {
+                query = query.Where(m => m.PricePerPerson >= maxPrice.Value);
+            }
+            if (!string.IsNullOrWhiteSpace(audience))
+            {
+                query = query.Where(q => q.TargetAudience.ToString().Equals(audience, StringComparison.OrdinalIgnoreCase));
+            }
+
+            var result = query.OrderBy(a => a.PricePerPerson).ThenBy(a => a.Name).ToList();
+
+            return await Task.FromResult(result);
+        }
     }
 }

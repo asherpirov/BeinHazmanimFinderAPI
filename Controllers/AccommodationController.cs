@@ -39,7 +39,7 @@ namespace BeinHazmanimFinderAPI.Controllers
         public async Task<ActionResult<Accommodation>> CreateAsync(Accommodation accommodation)
         {
             var created = await _ripository.CreateAsync(accommodation);
-            return CreatedAtAction(nameof(GetByIdAsync), new { id = created.Id }, created);
+            return CreatedAtAction("GetById", new { id = created.Id }, created);
         }
 
         [HttpPut("{id}")]
@@ -76,6 +76,15 @@ namespace BeinHazmanimFinderAPI.Controllers
             return Ok(query);
 
         }
+
+        [HttpGet("type")]
+        public async Task<ActionResult<IEnumerable<Accommodation>>> AcrionGetAccommodationTypesAsync()
+        {
+            var types = await _ripository.GetAccommodationTypesAsync();
+            return Ok(types);
+        }
+
+
 
     };
 }
