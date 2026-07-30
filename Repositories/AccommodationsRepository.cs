@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BeinHazmanimFinderAPI.Ripositories
 {
-    public class AccommodationsRepository : IAccommodationsRipository
+    public class AccommodationsRepository : IAccommodationsRepository
     {
         private readonly List<Accommodation> _accommodations;
         private int _nextId;

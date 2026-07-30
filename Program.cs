@@ -12,7 +12,7 @@ builder.Services.AddControllers().AddJsonOptions(
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddSingleton<IAccommodationsRipository, AccommodationsRepository>();
+builder.Services.AddSingleton<IAccommodationsRepository, AccommodationsRepository>();
 builder.Services.AddSingleton<IActivityPlacesRepository, ActivityPlacesRepository>();
 
 var app = builder.Build();

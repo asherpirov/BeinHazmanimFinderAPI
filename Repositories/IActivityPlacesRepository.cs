@@ -12,6 +12,5 @@ namespace BeinHazmanimFinderAPI.Ripositories
         public Task<IEnumerable<ActivityPlace>> SearchAsync(string? category, string? city, decimal? maxPrice, string? audience);
 
 
-
     }
 }

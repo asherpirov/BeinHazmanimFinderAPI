@@ -9,9 +9,9 @@ namespace BeinHazmanimFinderAPI.Controllers
     [Route("api/[controller]")]
     public class AccommodationController : ControllerBase
     {
-        private readonly IAccommodationsRipository _ripository;
+        private readonly IAccommodationsRepository _ripository;
 
-        public AccommodationController(IAccommodationsRipository repository)
+        public AccommodationController(IAccommodationsRepository repository)
         {
             _ripository = repository;
         }
@@ -83,8 +83,6 @@ namespace BeinHazmanimFinderAPI.Controllers
             var types = await _ripository.GetAccommodationTypesAsync();
             return Ok(types);
         }
-
-
 
     };
 }

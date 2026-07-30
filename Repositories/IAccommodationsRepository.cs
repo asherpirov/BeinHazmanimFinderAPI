@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BeinHazmanimFinderAPI.Ripositories
 {
-    public interface IAccommodationsRipository
+    public interface IAccommodationsRepository
     {
         public Task<IEnumerable<Accommodation>> GetAllAsync();
         public Task<Accommodation?> GetByIdAsync(int id);
