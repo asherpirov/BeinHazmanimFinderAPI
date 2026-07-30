@@ -42,8 +42,6 @@ namespace BeinHazmanimFinderAPI.Models
 
         [Required(ErrorMessage = "The RequiresKashrut is Required")]
         public bool RequiresKashrut { get; set; } = false;
-
-        [MaxLength(50, ErrorMessage = "The KashrutAuthority must be up to 50 characters.")]
         public KashrutAuthorityType? KashrutAuthority { get; set; }
     }
 }
