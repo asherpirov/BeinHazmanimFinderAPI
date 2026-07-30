@@ -2,7 +2,7 @@
 {
     public enum AccommodationType
     {
-        Hotel, Vacation, Apartment, GuestHouse,
+        Hotel, VacationApartment, GuestHouse,
         Zimmer, Resort, Hostel
     }
 }
